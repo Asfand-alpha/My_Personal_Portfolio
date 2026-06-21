@@ -1,0 +1,96 @@
+/* ========================================
+   TECH STACK - Glassmorphism Badges
+   ======================================== */
+
+.tech-stack {
+  padding: 40px 0 60px;
+  position: relative;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.section-tag {
+  display: inline-block;
+  padding: 4px 14px;
+  background: rgba(255, 87, 34, 0.08);
+  border: 1px solid rgba(255, 87, 34, 0.2);
+  border-radius: 50px;
+  font-size: 0.8rem;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.skills-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 18px;
+}
+
+.skill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 32px;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 0;
+  transform: translateY(20px);
+
+  .visible & {
+    animation: fadeInUp 0.5s ease forwards;
+  }
+
+  &:hover {
+    background: rgba(255, 87, 34, 0.08);
+    border-color: rgba(255, 87, 34, 0.3);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(255, 87, 34, 0.15);
+  }
+}
+
+.skill-icon {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.skill-name {
+  letter-spacing: 0.3px;
+}
+
+@media (max-width: 640px) {
+  .skills-row {
+    gap: 12px;
+  }
+
+  .skill-badge {
+    padding: 12px 22px;
+    font-size: 0.95rem;
+  }
+
+  .skill-icon {
+    width: 26px;
+    height: 26px;
+  }
+}

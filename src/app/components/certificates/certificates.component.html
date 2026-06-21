@@ -1,0 +1,59 @@
+<section class="certificates-section" [class.visible]="isVisible">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Certificates</span>
+      <h2 class="section-title">Credentials & Achievements</h2>
+      <p class="section-subtitle">Professional certifications that validate my expertise</p>
+    </div>
+
+    <div class="carousel-wrapper">
+      <button class="carousel-btn prev" (click)="prev()" aria-label="Previous">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="15 18 9 12 15 6"/>
+        </svg>
+      </button>
+
+      <div class="carousel-stage">
+        <div class="carousel-track">
+          @for (cert of certificates; track cert.title; let i = $index) {
+            <div class="cert-card"
+                 [style.transform]="getTransform(i)"
+                 [style.zIndex]="getZIndex(i)"
+                 [style.opacity]="getOpacity(i)"
+                 [class.active]="i === currentIndex"
+                 (click)="goTo(i)">
+              <div class="cert-icon">{{ cert.icon }}</div>
+              <div class="cert-info">
+                <h3 class="cert-title">{{ cert.title }}</h3>
+                <p class="cert-issuer">{{ cert.issuer }}</p>
+                <span class="cert-date">{{ cert.date }}</span>
+              </div>
+              <div class="cert-hover">
+                <a href="#" class="verify-btn">
+                  <span>View Verified Credential</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
+                    <polyline points="15 3 21 3 21 9"/>
+                    <line x1="10" y1="14" x2="21" y2="3"/>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+
+      <button class="carousel-btn next" (click)="next()" aria-label="Next">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="9 18 15 12 9 6"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="carousel-dots">
+      @for (cert of certificates; track cert.title; let i = $index) {
+        <button class="dot" [class.active]="i === currentIndex" (click)="goTo(i)" [attr.aria-label]="'Go to slide ' + (i + 1)"></button>
+      }
+    </div>
+  </div>
+</section>

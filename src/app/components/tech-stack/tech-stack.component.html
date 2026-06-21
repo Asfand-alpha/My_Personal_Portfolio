@@ -1,0 +1,16 @@
+<section class="tech-stack" [class.visible]="isVisible">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Tech Stack</span>
+      <h2 class="section-title">Technologies I Work With</h2>
+    </div>
+    <div class="skills-row">
+      @for (skill of skills; track skill.name; let i = $index) {
+        <div class="skill-badge" [style.animation-delay]="(i * 80) + 'ms'">
+          <img class="skill-icon" [src]="skill.icon" [alt]="skill.name" />
+          <span class="skill-name">{{ skill.name }}</span>
+        </div>
+      }
+    </div>
+  </div>
+</section>

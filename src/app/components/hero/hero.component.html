@@ -1,0 +1,69 @@
+<section class="hero" [class.visible]="isVisible">
+  <div class="hero-container container">
+    <!-- Left Side: Text Content -->
+    <div class="hero-content" [style.transform]="'translateX(' + (mouseX * 0.3) + 'px) translateY(' + (mouseY * 0.2) + 'px)'">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        Available for projects
+      </div>
+      <h1 class="hero-title">
+        Hello, I'm <span class="name-highlight">Asfandyar</span>
+      </h1>
+      <h2 class="hero-subtitle">
+        Web Developer & <span class="accent-text">AI Automation Expert</span>
+      </h2>
+      <p class="hero-description">
+        Crafting exceptional digital experiences with cutting-edge technologies.
+        Specialized in full-stack development and intelligent automation solutions.
+      </p>
+      <div class="hero-buttons">
+        <a href="#contact" class="btn btn-primary">
+          <span>Get a project?</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+        <a href="#resume" class="btn btn-outline">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+          </svg>
+          <span>My resume</span>
+        </a>
+      </div>
+
+  
+    </div>
+
+    <!-- Right Side: Profile Image with Neon Rings -->
+    <div class="hero-image-wrapper" [style.transform]="'translateX(' + (mouseX * -0.2) + 'px) translateY(' + (mouseY * -0.15) + 'px)'">
+      <div class="profile-graphic">
+        <!-- Concentric neon rings -->
+        <div class="neon-ring ring-1"></div>
+        <div class="neon-ring ring-2"></div>
+        <div class="neon-ring ring-3"></div>
+        <div class="neon-ring ring-4"></div>
+        
+        <!-- Right side crescent glow -->
+        <div class="crescent-glow"></div>
+        
+        <!-- Profile image -->
+        <div class="profile-image">
+          <img src="assets/profile.png" alt="Asfandyar - Web Developer & AI Automation Expert" class="profile-img">
+        </div>
+
+        <!-- Floating particles -->
+        <div class="particle particle-1"></div>
+        <div class="particle particle-2"></div>
+        <div class="particle particle-3"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="scroll-indicator">
+    <div class="mouse">
+      <div class="wheel"></div>
+    </div>
+    <span>Scroll Down</span>
+  </div>
+</section>
