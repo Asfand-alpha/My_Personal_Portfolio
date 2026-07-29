@@ -3,7 +3,7 @@
     <div class="section-header">
       <span class="section-tag">Certificates</span>
       <h2 class="section-title">Credentials & Achievements</h2>
-      <p class="section-subtitle">Professional certifications that validate my expertise</p>
+      <p class="section-subtitle">Professional certifications that validate my expertise — click the active card to flip it</p>
     </div>
 
     <div class="carousel-wrapper">
@@ -13,7 +13,7 @@
         </svg>
       </button>
 
-      <div class="carousel-stage">
+      <div class="carousel-stage" (mouseenter)="onStageEnter()" (mouseleave)="onStageLeave()">
         <div class="carousel-track">
           @for (cert of certificates; track cert.title; let i = $index) {
             <div class="cert-card"
@@ -21,22 +21,71 @@
                  [style.zIndex]="getZIndex(i)"
                  [style.opacity]="getOpacity(i)"
                  [class.active]="i === currentIndex"
+                 [class.flipped]="i === currentIndex && flipped"
                  (click)="goTo(i)">
-              <div class="cert-icon">{{ cert.icon }}</div>
-              <div class="cert-info">
-                <h3 class="cert-title">{{ cert.title }}</h3>
-                <p class="cert-issuer">{{ cert.issuer }}</p>
-                <span class="cert-date">{{ cert.date }}</span>
-              </div>
-              <div class="cert-hover">
-                <a href="#" class="verify-btn">
-                  <span>View Verified Credential</span>
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
-                    <polyline points="15 3 21 3 21 9"/>
-                    <line x1="10" y1="14" x2="21" y2="3"/>
+
+              @if (i === currentIndex) {
+                <span class="verified-badge">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                    <polyline points="20 6 9 17 4 12"/>
                   </svg>
-                </a>
+                  Verified
+                </span>
+              }
+
+              <div class="flip-inner">
+                <!-- Front face -->
+                <div class="card-face front">
+                  <div class="cert-icon-ring">
+                    <span class="cert-icon">{{ cert.icon }}</span>
+                  </div>
+                  <div class="cert-info">
+                    <h3 class="cert-title">{{ cert.title }}</h3>
+                    <p class="cert-issuer">{{ cert.issuer }}</p>
+                    <span class="cert-date">{{ cert.date }}</span>
+                  </div>
+
+                  @if (i === currentIndex) {
+                    <button class="flip-hint" (click)="$event.stopPropagation(); toggleFlip()" aria-label="Flip card for details">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M23 4v6h-6"/>
+                        <path d="M1 20v-6h6"/>
+                        <path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/>
+                      </svg>
+                      <span>Details</span>
+                    </button>
+                  }
+                </div>
+
+                <!-- Back face -->
+                <div class="card-face back">
+                  <h3 class="back-title">{{ cert.title }}</h3>
+                  <p class="back-desc">{{ cert.description }}</p>
+
+                  <div class="back-skills">
+                    @for (skill of cert.skills; track skill) {
+                      <span class="skill-chip">{{ skill }}</span>
+                    }
+                  </div>
+
+                  <span class="credential-id">ID: {{ cert.credentialId }}</span>
+
+                  <a href="#" class="verify-btn" (click)="$event.stopPropagation()">
+                    <span>View Verified Credential</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
+                      <polyline points="15 3 21 3 21 9"/>
+                      <line x1="10" y1="14" x2="21" y2="3"/>
+                    </svg>
+                  </a>
+
+                  <button class="flip-back" (click)="$event.stopPropagation(); toggleFlip()" aria-label="Flip back">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <line x1="18" y1="6" x2="6" y2="18"/>
+                      <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                  </button>
+                </div>
               </div>
             </div>
           }
@@ -48,6 +97,14 @@
           <polyline points="9 18 15 12 9 6"/>
         </svg>
       </button>
+    </div>
+
+    <div class="progress-track">
+      @if (showProgress) {
+        <div class="progress-fill"
+             [class.paused]="isPaused || flipped"
+             [style.animationDuration.ms]="autoSlideDuration"></div>
+      }
     </div>
 
     <div class="carousel-dots">

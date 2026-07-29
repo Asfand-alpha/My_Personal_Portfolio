@@ -1,5 +1,5 @@
 /* ========================================
-   CERTIFICATES SECTION - 3D Carousel
+   CERTIFICATES SECTION - 3D Flip Carousel
    ======================================== */
 
 .certificates-section {
@@ -11,6 +11,12 @@
 .section-header {
   text-align: center;
   margin-bottom: 60px;
+  opacity: 0;
+  transform: translateY(30px);
+
+  .visible & {
+    animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
 }
 
 .section-tag {
@@ -47,6 +53,11 @@
   justify-content: center;
   gap: 20px;
   perspective: 1200px;
+  opacity: 0;
+
+  .visible & {
+    animation: scaleIn 0.8s 0.15s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
 }
 
 .carousel-btn {
@@ -68,16 +79,32 @@
     background: rgba(255, 87, 34, 0.1);
     border-color: rgba(255, 87, 34, 0.3);
     color: var(--accent);
+    transform: scale(1.08);
+  }
+
+  &:active {
+    transform: scale(0.94);
   }
 }
 
 .carousel-stage {
+  position: relative;
   width: 100%;
   max-width: 320px;
-  height: 380px;
+  height: 400px;
   display: flex;
   align-items: center;
   justify-content: center;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -50px;
+    background: radial-gradient(circle, rgba(255, 87, 34, 0.14), transparent 70%);
+    filter: blur(30px);
+    z-index: -1;
+    animation: pulse-glow 4s ease-in-out infinite;
+  }
 }
 
 .carousel-track {
@@ -90,12 +117,83 @@
   transform-style: preserve-3d;
 }
 
-/* ---- Certificate Card ---- */
+/* ---- Certificate Card (outer = coverflow transform) ---- */
 .cert-card {
   position: absolute;
   width: 280px;
   height: 340px;
-  background: rgba(22, 27, 34, 0.8);
+  border-radius: 20px;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  filter: grayscale(60%);
+  user-select: none;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 23px;
+    padding: 2px;
+    background: conic-gradient(from var(--angle, 0deg), transparent 0%, var(--accent) 12%, transparent 28%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  &.active {
+    filter: grayscale(0%);
+
+    &::before {
+      opacity: 1;
+      animation: spin-border 4s linear infinite;
+    }
+  }
+}
+
+.verified-badge {
+  position: absolute;
+  top: -12px;
+  right: 16px;
+  z-index: 5;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  background: linear-gradient(135deg, var(--accent), #e64a19);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  border-radius: 50px;
+  box-shadow: 0 4px 14px rgba(255, 87, 34, 0.4);
+  animation: pulse-ring 2.4s ease-out infinite;
+}
+
+/* ---- Flip mechanism ---- */
+.flip-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.flipped .flip-inner {
+  transform: rotateY(180deg);
+}
+
+.card-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  background: rgba(22, 27, 34, 0.85);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.06);
@@ -106,37 +204,49 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  gap: 16px;
-  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-  cursor: pointer;
-  backface-visibility: hidden;
-  filter: grayscale(60%);
-  user-select: none;
+  gap: 14px;
 
-  &.active {
-    filter: grayscale(0%);
+  .active & {
     border-color: rgba(255, 87, 34, 0.3);
-    box-shadow:
-      0 20px 60px rgba(0, 0, 0, 0.3),
-      0 0 30px rgba(255, 87, 34, 0.08);
-
-    .cert-hover {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), 0 0 30px rgba(255, 87, 34, 0.08);
   }
+}
 
-  &:hover {
-    .cert-hover {
-      opacity: 1;
-      transform: translateY(0);
+.card-face.back {
+  transform: rotateY(180deg);
+  justify-content: flex-start;
+  padding-top: 36px;
+  overflow-y: auto;
+}
+
+/* ---- Front face content ---- */
+.cert-icon-ring {
+  position: relative;
+  width: 84px;
+  height: 84px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 87, 34, 0.12), transparent 70%);
+  margin-bottom: 4px;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 87, 34, 0.25);
+
+    .active & {
+      animation: pulse-ring 2.2s ease-out infinite;
     }
   }
 }
 
 .cert-icon {
-  font-size: 3rem;
-  margin-bottom: 8px;
+  font-size: 2.6rem;
+  filter: drop-shadow(0 4px 10px rgba(255, 87, 34, 0.2));
 }
 
 .cert-info {
@@ -168,17 +278,84 @@
   border-radius: 6px;
 }
 
-.cert-hover {
+.flip-hint {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 20px;
-  background: linear-gradient(to top, rgba(13, 17, 23, 0.95), transparent);
-  border-radius: 0 0 20px 20px;
-  opacity: 0;
-  transform: translateY(10px);
-  transition: all 0.4s ease;
+  bottom: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: rgba(255, 87, 34, 0.1);
+  border: 1px solid rgba(255, 87, 34, 0.25);
+  color: var(--accent-light);
+  border-radius: 50px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: rgba(255, 87, 34, 0.2);
+    transform: scale(1.05);
+  }
+}
+
+/* ---- Back face content ---- */
+.back-title {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+
+.back-desc {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+
+.back-skills {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+}
+
+.skill-chip {
+  padding: 3px 10px;
+  background: rgba(255, 87, 34, 0.06);
+  border: 1px solid rgba(255, 87, 34, 0.15);
+  border-radius: 8px;
+  font-size: 0.68rem;
+  color: var(--accent-light);
+  font-weight: 500;
+}
+
+.credential-id {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  letter-spacing: 0.4px;
+}
+
+.flip-back {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--text-secondary);
+  transition: all 0.25s ease;
+
+  &:hover {
+    background: rgba(255, 87, 34, 0.12);
+    color: var(--accent);
+  }
 }
 
 .verify-btn {
@@ -189,12 +366,13 @@
   background: linear-gradient(135deg, var(--accent), #e64a19);
   color: #fff;
   border-radius: 10px;
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   font-weight: 600;
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px rgba(255, 87, 34, 0.3);
   position: relative;
   overflow: hidden;
+  margin-top: 4px;
 
   &::before {
     content: '';
@@ -211,12 +389,40 @@
   }
 }
 
+/* ---- Autoplay progress bar ---- */
+.progress-track {
+  width: 100%;
+  max-width: 200px;
+  height: 3px;
+  margin: 24px auto 0;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-light));
+  border-radius: 3px;
+  animation: fill-progress linear forwards;
+
+  &.paused {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes fill-progress {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+
 /* ---- Carousel Dots ---- */
 .carousel-dots {
   display: flex;
   justify-content: center;
   gap: 8px;
-  margin-top: 30px;
+  margin-top: 16px;
 }
 
 .dot {
@@ -244,13 +450,21 @@
 
   .carousel-stage {
     max-width: 260px;
-    height: 340px;
+    height: 380px;
   }
 
   .cert-card {
     width: 240px;
-    height: 300px;
+    height: 340px;
+  }
+
+  .card-face {
     padding: 24px;
+  }
+
+  .card-face.back {
+    padding-top: 28px;
+    gap: 10px;
   }
 
   .carousel-btn {
@@ -262,16 +476,49 @@
 @media (max-width: 480px) {
   .carousel-stage {
     max-width: 220px;
-    height: 300px;
+    height: 360px;
   }
 
   .cert-card {
     width: 200px;
-    height: 260px;
+    height: 320px;
+  }
+
+  .card-face {
     padding: 20px;
+    gap: 8px;
+  }
+
+  .card-face.back {
+    padding-top: 22px;
+    gap: 8px;
+  }
+
+  .cert-icon-ring {
+    width: 64px;
+    height: 64px;
   }
 
   .cert-icon {
-    font-size: 2.2rem;
+    font-size: 2rem;
+  }
+
+  .back-title {
+    font-size: 0.9rem;
+  }
+
+  .back-desc {
+    font-size: 0.72rem;
+    line-height: 1.45;
+  }
+
+  .skill-chip {
+    font-size: 0.62rem;
+    padding: 2px 8px;
+  }
+
+  .verify-btn {
+    padding: 8px 16px;
+    font-size: 0.72rem;
   }
 }

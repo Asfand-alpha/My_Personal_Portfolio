@@ -4,13 +4,28 @@
       <span class="section-tag">Tech Stack</span>
       <h2 class="section-title">Technologies I Work With</h2>
     </div>
-    <div class="skills-row">
-      @for (skill of skills; track skill.name; let i = $index) {
-        <div class="skill-badge" [style.animation-delay]="(i * 80) + 'ms'">
-          <img class="skill-icon" [src]="skill.icon" [alt]="skill.name" />
-          <span class="skill-name">{{ skill.name }}</span>
+
+    @for (group of groups; track group.name; let g = $index) {
+      <div class="tech-group" [style.animation-delay]="(g * 120) + 'ms'">
+        <div class="group-label">
+          <span class="group-dot"></span>
+          {{ group.name }}
         </div>
-      }
-    </div>
+        <div class="skills-row">
+          @for (skill of group.skills; track skill.name; let i = $index) {
+            <div class="skill-badge" [style.animation-delay]="(g * 120 + i * 60) + 'ms'">
+              <span class="skill-icon">
+                @if (skill.icon) {
+                  <img [src]="skill.icon" [alt]="skill.name" />
+                } @else {
+                  <span class="svg-icon" [innerHTML]="skill.svg"></span>
+                }
+              </span>
+              <span class="skill-name">{{ skill.name }}</span>
+            </div>
+          }
+        </div>
+      </div>
+    }
   </div>
 </section>
