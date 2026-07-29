@@ -1,0 +1,38 @@
+<section class="contact-section" [class.visible]="isVisible">
+  <div class="container">
+    <div class="section-header">
+      <span class="availability-badge">
+        <span class="badge-dot"></span>
+        Available for projects
+      </span>
+      <h2 class="section-title">Let's Build Something Together</h2>
+      <p class="section-subtitle">Have a project in mind? Reach out directly — I typically respond within a few hours.</p>
+    </div>
+
+    <div class="contact-grid">
+      @for (method of methods; track method.label; let i = $index) {
+        <a class="contact-card"
+           [href]="method.href"
+           [target]="method.external ? '_blank' : null"
+           [rel]="method.external ? 'noopener' : null"
+           [style.animation-delay]="(i * 120) + 'ms'"
+           (click)="onCardClick(i, method.copyValue)">
+          <span class="card-icon" [innerHTML]="method.icon"></span>
+          <span class="card-info">
+            <span class="card-label">{{ method.label }}</span>
+            <span class="card-value">{{ method.value }}</span>
+          </span>
+          <span class="card-arrow">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </span>
+
+          @if (copiedIndex === i) {
+            <span class="copied-toast">{{ method.label }} copied to clipboard</span>
+          }
+        </a>
+      }
+    </div>
+  </div>
+</section>

@@ -6,6 +6,7 @@ import { TechStackComponent } from './components/tech-stack/tech-stack.component
 import { AboutComponent } from './components/about/about.component';
 import { ProjectsComponent } from './components/projects/projects.component';
 import { CertificatesComponent } from './components/certificates/certificates.component';
+import { ContactComponent } from './components/contact/contact.component';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +18,8 @@ import { CertificatesComponent } from './components/certificates/certificates.co
     TechStackComponent,
     AboutComponent,
     ProjectsComponent,
-    CertificatesComponent
+    CertificatesComponent,
+    ContactComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
