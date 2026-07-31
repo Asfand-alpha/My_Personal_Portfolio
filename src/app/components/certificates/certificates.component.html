@@ -68,16 +68,18 @@
                     }
                   </div>
 
-                  <span class="credential-id">ID: {{ cert.credentialId }}</span>
+                  @if (cert.credentialId) {
+                    <span class="credential-id">ID: {{ cert.credentialId }}</span>
+                  }
 
-                  <a href="#" class="verify-btn" (click)="$event.stopPropagation()">
+                  <button class="verify-btn" (click)="$event.stopPropagation(); openCertModal(cert)">
                     <span>View Verified Credential</span>
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                       <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
                       <polyline points="15 3 21 3 21 9"/>
                       <line x1="10" y1="14" x2="21" y2="3"/>
                     </svg>
-                  </a>
+                  </button>
 
                   <button class="flip-back" (click)="$event.stopPropagation(); toggleFlip()" aria-label="Flip back">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -113,4 +115,66 @@
       }
     </div>
   </div>
+
+  @if (selectedCert) {
+    <div class="cert-modal-backdrop" [class.closing]="isClosingModal" (click)="closeCertModal()">
+      <div class="cert-modal" [class.closing]="isClosingModal" (click)="$event.stopPropagation()">
+        <button class="modal-close" (click)="closeCertModal()" aria-label="Close">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+
+        <div class="modal-body">
+          <div class="modal-preview">
+            @if (isPdfFile(selectedCert.fileUrl)) {
+              <iframe [src]="safeFileUrl" title="Certificate preview"></iframe>
+            } @else {
+              <img [src]="encodedUrl(selectedCert.fileUrl)" [alt]="selectedCert.title" />
+            }
+          </div>
+
+          <div class="modal-details">
+            <div class="modal-header">
+              <div class="modal-icon">{{ selectedCert.icon }}</div>
+              <div>
+                <h3 class="modal-title">{{ selectedCert.title }}</h3>
+                <p class="modal-issuer">{{ selectedCert.issuer }} &middot; {{ selectedCert.date }}</p>
+              </div>
+            </div>
+
+            <p class="modal-desc">{{ selectedCert.description }}</p>
+
+            <div class="modal-skills">
+              @for (skill of selectedCert.skills; track skill) {
+                <span class="skill-chip">{{ skill }}</span>
+              }
+            </div>
+
+            @if (selectedCert.credentialId) {
+              <span class="modal-credential-id">Credential ID: {{ selectedCert.credentialId }}</span>
+            }
+
+            <div class="modal-actions">
+              <a [href]="encodedUrl(selectedCert.fileUrl)" target="_blank" rel="noopener" class="modal-btn primary">
+                <span>Open in New Tab</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
+                  <polyline points="15 3 21 3 21 9"/>
+                  <line x1="10" y1="14" x2="21" y2="3"/>
+                </svg>
+              </a>
+              <a [href]="encodedUrl(selectedCert.fileUrl)" [download]="selectedCert.title" class="modal-btn secondary">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+                </svg>
+                <span>Download</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
 </section>

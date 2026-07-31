@@ -24,8 +24,8 @@
   align-items: center;
   gap: 8px;
   padding: 6px 16px;
-  background: rgba(255, 87, 34, 0.08);
-  border: 1px solid rgba(255, 87, 34, 0.2);
+  background: rgba(var(--accent-rgb), 0.08);
+  border: 1px solid rgba(var(--accent-rgb), 0.2);
   border-radius: 50px;
   font-size: 0.85rem;
   color: var(--accent);
@@ -89,10 +89,10 @@
   align-items: center;
   gap: 18px;
   padding: 26px;
-  background: rgba(22, 27, 34, 0.7);
+  background: rgba(var(--bg-secondary-rgb), 0.7);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(var(--surface-rgb), 0.06);
   border-radius: 18px;
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease;
   opacity: 0;
@@ -121,8 +121,8 @@
 
   &:hover {
     transform: translateY(-6px);
-    border-color: rgba(255, 87, 34, 0.35);
-    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.3), 0 0 30px rgba(255, 87, 34, 0.1);
+    border-color: rgba(var(--accent-rgb), 0.35);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.3), 0 0 30px rgba(var(--accent-rgb), 0.1);
 
     &::after {
       opacity: 1;
@@ -148,8 +148,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 87, 34, 0.08);
-  border: 1px solid rgba(255, 87, 34, 0.15);
+  background: rgba(var(--accent-rgb), 0.08);
+  border: 1px solid rgba(var(--accent-rgb), 0.15);
   border-radius: 14px;
   color: var(--accent);
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
@@ -191,12 +191,12 @@
   right: 16px;
   z-index: 2;
   padding: 5px 12px;
-  background: linear-gradient(135deg, var(--accent), #e64a19);
+  background: linear-gradient(135deg, var(--accent), var(--accent-dark));
   color: #fff;
   font-size: 0.72rem;
   font-weight: 600;
   border-radius: 50px;
-  box-shadow: 0 4px 14px rgba(255, 87, 34, 0.4);
+  box-shadow: 0 4px 14px rgba(var(--accent-rgb), 0.4);
   animation: toast-pop 1.8s ease forwards;
   pointer-events: none;
 }
@@ -216,8 +216,8 @@
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(var(--surface-rgb), 0.04);
+  border: 1px solid rgba(var(--surface-rgb), 0.08);
   color: var(--text-secondary);
   transition: all 0.3s ease;
 }
@@ -237,10 +237,10 @@
   flex-direction: column;
   gap: 18px;
   padding: 28px;
-  background: rgba(22, 27, 34, 0.7);
+  background: rgba(var(--bg-secondary-rgb), 0.7);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(var(--surface-rgb), 0.06);
   border-radius: 18px;
 }
 
@@ -265,8 +265,8 @@
   textarea {
     width: 100%;
     padding: 12px 14px;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(var(--surface-rgb), 0.03);
+    border: 1px solid rgba(var(--surface-rgb), 0.1);
     border-radius: 10px;
     color: var(--text-primary);
     font-size: 0.92rem;
@@ -280,8 +280,8 @@
 
     &:focus {
       outline: none;
-      border-color: rgba(255, 87, 34, 0.5);
-      background: rgba(255, 87, 34, 0.03);
+      border-color: rgba(var(--accent-rgb), 0.5);
+      background: rgba(var(--accent-rgb), 0.03);
     }
   }
 
@@ -305,13 +305,13 @@
   gap: 10px;
   margin-top: 4px;
   padding: 14px 24px;
-  background: linear-gradient(135deg, var(--accent), #e64a19);
+  background: linear-gradient(135deg, var(--accent), var(--accent-dark));
   color: #fff;
   border-radius: 10px;
   font-size: 0.95rem;
   font-weight: 600;
   font-family: inherit;
-  box-shadow: 0 6px 20px rgba(255, 87, 34, 0.3);
+  box-shadow: 0 6px 20px rgba(var(--accent-rgb), 0.3);
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
@@ -327,7 +327,7 @@
 
   &:hover:not(:disabled) {
     transform: translateY(-2px);
-    box-shadow: 0 8px 26px rgba(255, 87, 34, 0.45);
+    box-shadow: 0 8px 26px rgba(var(--accent-rgb), 0.45);
   }
 
   &:disabled {

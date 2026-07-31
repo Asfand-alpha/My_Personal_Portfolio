@@ -1,0 +1,52 @@
+[
+  {
+    "title": "Foundational of C# Programming",
+    "issuer": "Microsoft, FreeCodeCamp",
+    "date": "2026",
+    "icon": "C#",
+    "credentialId": "",
+    "description": "All Basics of C# Programming, including OOP, LINQ, and asynchronous programming.",
+    "skills": ["C#", "OOP", "LINQ", "Asynchronous Programming", "Data Structures", "Algorithms"],
+    "fileUrl": "assets/certificates/csharp-foundational-certificate.png"
+  },
+  {
+    "title": ".NET Full Stack Developer",
+    "issuer": "Microsoft",
+    "date": "2026",
+    "icon": ".NET",
+    "link": "https://coursera.org/share/f9ed946a7c2cccd45ab29d0d788822b0",
+    "description": "Covers end-to-end application delivery across C#, ASP.NET Core, and cloud-ready deployment pipelines.",
+    "skills": ["ASP.NET Core", "ASP.NET Web API", "ASP.NET MVC","Blazor pages","C#", "EF Core", "REST APIs"],
+    "fileUrl": "assets/certificates/dotnet backend.png"
+  },
+  {
+    "title": "Python for AI & Automation",
+    "issuer": "Coursera",
+    "date": "2024",
+    "icon": "🐍",
+    "link": "https://coursera.org/share/f9ed946a7c2cccd45ab29d0d788822b0",
+    "description": "Focused on applying Python to intelligent automation, data pipelines, and machine learning workflows.",
+    "skills": ["Python", "Automation", "Machine Learning", "Data Pipelines"],
+    "fileUrl": "assets/certificates/python-for-ai-automation.pdf"
+  },
+  {
+    "title": "AWS Cloud Practitioner",
+    "issuer": "Amazon Web Services",
+    "date": "2023",
+    "icon": "☁️",
+    "credentialId": "AWS-CCP-2023-7734",
+    "description": "Demonstrates foundational knowledge of AWS cloud services, architecture, security, and pricing models.",
+    "skills": ["Cloud Architecture", "AWS Core Services", "Security", "Cost Optimization"],
+    "fileUrl": "assets/certificates/aws-cloud-practitioner.pdf"
+  },
+  {
+    "title": "TypeScript Advanced",
+    "issuer": "Udemy",
+    "date": "2024",
+    "icon": "🔷",
+    "credentialId": "UDM-TS-ADV-2024-9902",
+    "description": "Deep dive into advanced typing, generics, and design patterns for building scalable TypeScript codebases.",
+    "skills": ["Generics", "Type Design", "Decorators", "Tooling"],
+    "fileUrl": "assets/certificates/typescript-advanced.pdf"
+  }
+]

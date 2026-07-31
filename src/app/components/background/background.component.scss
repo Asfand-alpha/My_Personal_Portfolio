@@ -15,7 +15,7 @@
   position: absolute;
   inset: -100%;
   background-image:
-    radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    radial-gradient(rgba(var(--surface-rgb), 0.05) 1px, transparent 1px);
   background-size: 40px 40px;
   animation: grid-scroll 60s linear infinite;
   opacity: 0.5;
@@ -38,8 +38,8 @@
   border-radius: 50%;
   background: radial-gradient(
     circle at center,
-    rgba(255, 87, 34, 0.12) 0%,
-    rgba(255, 87, 34, 0.05) 30%,
+    rgba(var(--accent-rgb), 0.12) 0%,
+    rgba(var(--accent-rgb), 0.05) 30%,
     transparent 70%
   );
   filter: blur(60px);
@@ -52,8 +52,8 @@
 .ambient-particle {
   position: absolute;
   border-radius: 50%;
-  background: rgba(255, 87, 34, 0.08);
-  box-shadow: 0 0 20px rgba(255, 87, 34, 0.05);
+  background: rgba(var(--accent-rgb), 0.08);
+  box-shadow: 0 0 20px rgba(var(--accent-rgb), 0.05);
 }
 
 .p1 {

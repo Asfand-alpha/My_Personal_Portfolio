@@ -1,0 +1,54 @@
+<div class="theme-switcher">
+  <button class="switcher-btn" (click)="togglePanel()" aria-label="Theme settings" [attr.aria-expanded]="panelOpen">
+    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="13.5" cy="6.5" r="0.5" fill="currentColor"/>
+      <circle cx="17.5" cy="10.5" r="0.5" fill="currentColor"/>
+      <circle cx="8.5" cy="7.5" r="0.5" fill="currentColor"/>
+      <circle cx="6.5" cy="12.5" r="0.5" fill="currentColor"/>
+      <path d="M12 22a10 10 0 1 1 0-20c1 0 2 .5 2 2 0 1-1 1.5-1 2.5s1 1.5 2 1.5h2.5c1.5 0 2.5 1 2.5 2.5A9.98 9.98 0 0 1 12 22Z"/>
+    </svg>
+  </button>
+
+  @if (panelOpen) {
+    <div class="theme-panel">
+      <div class="panel-section">
+        <span class="panel-label">Accent Color</span>
+        <div class="swatches">
+          @for (opt of accentOptions; track opt.value) {
+            <button
+              class="swatch"
+              [class.active]="themeService.accent() === opt.value"
+              [style.background]="opt.color"
+              (click)="setAccent(opt.value)"
+              [attr.aria-label]="opt.label">
+              @if (themeService.accent() === opt.value) {
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+              }
+            </button>
+          }
+        </div>
+      </div>
+
+      <div class="panel-section">
+        <span class="panel-label">Appearance</span>
+        <button class="mode-toggle" (click)="toggleMode()">
+          <span class="mode-icon">
+            @if (themeService.mode() === 'dark') {
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/>
+              </svg>
+            } @else {
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="4"/>
+                <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+              </svg>
+            }
+          </span>
+          <span>{{ themeService.mode() === 'dark' ? 'Dark' : 'Light' }} Mode</span>
+        </button>
+      </div>
+    </div>
+  }
+</div>

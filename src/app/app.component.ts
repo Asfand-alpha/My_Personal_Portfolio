@@ -7,6 +7,7 @@ import { AboutComponent } from './components/about/about.component';
 import { ProjectsComponent } from './components/projects/projects.component';
 import { CertificatesComponent } from './components/certificates/certificates.component';
 import { ContactComponent } from './components/contact/contact.component';
+import { ThemeSwitcherComponent } from './components/theme-switcher/theme-switcher.component';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +20,8 @@ import { ContactComponent } from './components/contact/contact.component';
     AboutComponent,
     ProjectsComponent,
     CertificatesComponent,
-    ContactComponent
+    ContactComponent,
+    ThemeSwitcherComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'

@@ -15,8 +15,8 @@
 .section-tag {
   display: inline-block;
   padding: 4px 14px;
-  background: rgba(255, 87, 34, 0.08);
-  border: 1px solid rgba(255, 87, 34, 0.2);
+  background: rgba(var(--accent-rgb), 0.08);
+  border: 1px solid rgba(var(--accent-rgb), 0.2);
   border-radius: 50px;
   font-size: 0.8rem;
   color: var(--accent);
@@ -50,8 +50,8 @@
 
 .filter-tab {
   padding: 9px 20px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(var(--surface-rgb), 0.03);
+  border: 1px solid rgba(var(--surface-rgb), 0.08);
   border-radius: 50px;
   color: var(--text-secondary);
   font-size: 0.85rem;
@@ -60,14 +60,14 @@
 
   &:hover {
     color: var(--text-primary);
-    border-color: rgba(255, 87, 34, 0.25);
+    border-color: rgba(var(--accent-rgb), 0.25);
   }
 
   &.active {
-    background: linear-gradient(135deg, var(--accent), #e64a19);
+    background: linear-gradient(135deg, var(--accent), var(--accent-dark));
     border-color: transparent;
     color: #fff;
-    box-shadow: 0 6px 20px rgba(255, 87, 34, 0.3);
+    box-shadow: 0 6px 20px rgba(var(--accent-rgb), 0.3);
   }
 }
 
@@ -81,10 +81,10 @@
 /* ---- Project Card ---- */
 .project-card {
   position: relative;
-  background: rgba(22, 27, 34, 0.7);
+  background: rgba(var(--bg-secondary-rgb), 0.7);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(var(--surface-rgb), 0.06);
   border-radius: 18px;
   overflow: hidden;
   transition: transform 0.25s ease, border-color 0.4s ease, box-shadow 0.4s ease;
@@ -114,10 +114,10 @@
   }
 
   &:hover {
-    border-color: rgba(255, 87, 34, 0.4);
+    border-color: rgba(var(--accent-rgb), 0.4);
     box-shadow:
       0 20px 50px rgba(0, 0, 0, 0.3),
-      0 0 30px rgba(255, 87, 34, 0.1);
+      0 0 30px rgba(var(--accent-rgb), 0.1);
 
     &::after {
       opacity: 1;
@@ -143,19 +143,19 @@
   align-items: center;
   gap: 5px;
   padding: 5px 11px;
-  background: linear-gradient(135deg, var(--accent), #e64a19);
+  background: linear-gradient(135deg, var(--accent), var(--accent-dark));
   color: #fff;
   font-size: 0.68rem;
   font-weight: 700;
   letter-spacing: 0.3px;
   border-radius: 50px;
-  box-shadow: 0 4px 14px rgba(255, 87, 34, 0.4);
+  box-shadow: 0 4px 14px rgba(var(--accent-rgb), 0.4);
 }
 
 .card-image {
   position: relative;
   height: 180px;
-  background: linear-gradient(135deg, rgba(255, 87, 34, 0.06), rgba(255, 87, 34, 0.02));
+  background: linear-gradient(135deg, rgba(var(--accent-rgb), 0.06), rgba(var(--accent-rgb), 0.02));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -165,7 +165,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(255, 87, 34, 0.2), transparent 60%);
+    background: radial-gradient(circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(var(--accent-rgb), 0.2), transparent 60%);
     opacity: 0;
     transition: opacity 0.3s ease;
     pointer-events: none;
@@ -180,7 +180,7 @@
   font-family: var(--font-display);
   font-size: 4rem;
   font-weight: 700;
-  color: rgba(255, 255, 255, 0.05);
+  color: rgba(var(--surface-rgb), 0.05);
   line-height: 1;
   user-select: none;
   z-index: 0;
@@ -217,7 +217,7 @@
   align-items: center;
   justify-content: center;
   gap: 14px;
-  background: rgba(13, 17, 23, 0.65);
+  background: rgba(var(--bg-primary-rgb), 0.65);
   opacity: 0;
   transition: opacity 0.3s ease;
   z-index: 2;
@@ -232,7 +232,7 @@
   border-radius: 50%;
   background: var(--accent);
   color: #fff;
-  box-shadow: 0 4px 15px rgba(255, 87, 34, 0.4);
+  box-shadow: 0 4px 15px rgba(var(--accent-rgb), 0.4);
   transition: transform 0.3s ease, background 0.3s ease;
   transform: translateY(10px);
 
@@ -243,7 +243,7 @@
 
   &:hover {
     transform: scale(1.1) !important;
-    background: #e64a19;
+    background: var(--accent-dark);
   }
 }
 
@@ -275,8 +275,8 @@
 
 .tag {
   padding: 4px 12px;
-  background: rgba(255, 87, 34, 0.06);
-  border: 1px solid rgba(255, 87, 34, 0.12);
+  background: rgba(var(--accent-rgb), 0.06);
+  border: 1px solid rgba(var(--accent-rgb), 0.12);
   border-radius: 8px;
   font-size: 0.75rem;
   color: var(--accent-light);

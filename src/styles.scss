@@ -3,20 +3,62 @@
    ======================================== */
 
 :root {
+  /* Accent - stored as an RGB triple so any component can build
+     rgba(var(--accent-rgb), X) at whatever opacity it needs. */
+  --accent-rgb: 255, 87, 34;
+  --accent-light-rgb: 255, 138, 101;
+  --accent-dark-rgb: 230, 74, 25;
+
+  --accent: rgb(var(--accent-rgb));
+  --accent-light: rgb(var(--accent-light-rgb));
+  --accent-dark: rgb(var(--accent-dark-rgb));
+  --accent-glow: rgba(var(--accent-rgb), 0.4);
+
+  /* Dark theme (default) */
   --bg-primary: #0d1117;
+  --bg-primary-rgb: 13, 17, 23;
   --bg-secondary: #161b22;
-  --bg-card: rgba(22, 27, 34, 0.7);
-  --accent: #ff5722;
-  --accent-glow: rgba(255, 87, 34, 0.4);
-  --accent-light: #ff8a65;
+  --bg-secondary-rgb: 22, 27, 34;
+  --bg-card: rgba(var(--bg-secondary-rgb), 0.7);
   --text-primary: #e6edf3;
   --text-secondary: #8b949e;
   --text-muted: #6e7681;
-  --border-color: rgba(255, 87, 34, 0.15);
-  --glass-bg: rgba(255, 255, 255, 0.03);
-  --glass-border: rgba(255, 255, 255, 0.08);
+  --border-color: rgba(var(--accent-rgb), 0.15);
+  --surface-rgb: 255, 255, 255;
+  --glass-bg: rgba(var(--surface-rgb), 0.03);
+  --glass-border: rgba(var(--surface-rgb), 0.08);
+
   --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-display: 'Space Grotesk', 'Inter', sans-serif;
+}
+
+/* ---- Accent color variants ---- */
+:root[data-accent='blue'] {
+  --accent-rgb: 59, 130, 246;
+  --accent-light-rgb: 96, 165, 250;
+  --accent-dark-rgb: 37, 99, 235;
+}
+
+:root[data-accent='gray'] {
+  --accent-rgb: 100, 116, 139;
+  --accent-light-rgb: 148, 163, 184;
+  --accent-dark-rgb: 71, 85, 105;
+}
+
+/* ---- Light theme ---- */
+:root[data-theme='light'] {
+  --bg-primary: #f6f6f4;
+  --bg-primary-rgb: 246, 246, 244;
+  --bg-secondary: #ffffff;
+  --bg-secondary-rgb: 255, 255, 255;
+  --bg-card: rgba(var(--bg-secondary-rgb), 0.75);
+  --text-primary: #14171a;
+  --text-secondary: #495057;
+  --text-muted: #767c84;
+  --border-color: rgba(var(--accent-rgb), 0.22);
+  --surface-rgb: 20, 23, 26;
+  --glass-bg: rgba(var(--surface-rgb), 0.035);
+  --glass-border: rgba(var(--surface-rgb), 0.1);
 }
 
 *,
@@ -121,10 +163,10 @@ button {
 
 @keyframes pulse-glow {
   0%, 100% {
-    box-shadow: 0 0 20px rgba(255, 87, 34, 0.3);
+    box-shadow: 0 0 20px rgba(var(--accent-rgb), 0.3);
   }
   50% {
-    box-shadow: 0 0 40px rgba(255, 87, 34, 0.6);
+    box-shadow: 0 0 40px rgba(var(--accent-rgb), 0.6);
   }
 }
 
@@ -183,7 +225,7 @@ button {
 }
 
 @keyframes pulse-ring {
-  0% { box-shadow: 0 0 0 0 rgba(255, 87, 34, 0.5); }
-  70% { box-shadow: 0 0 0 12px rgba(255, 87, 34, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(255, 87, 34, 0); }
+  0% { box-shadow: 0 0 0 0 rgba(var(--accent-rgb), 0.5); }
+  70% { box-shadow: 0 0 0 12px rgba(var(--accent-rgb), 0); }
+  100% { box-shadow: 0 0 0 0 rgba(var(--accent-rgb), 0); }
 }

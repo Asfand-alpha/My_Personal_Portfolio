@@ -39,8 +39,8 @@
   align-items: center;
   gap: 8px;
   padding: 6px 16px;
-  background: rgba(255, 87, 34, 0.08);
-  border: 1px solid rgba(255, 87, 34, 0.2);
+  background: rgba(var(--accent-rgb), 0.08);
+  border: 1px solid rgba(var(--accent-rgb), 0.2);
   border-radius: 50px;
   font-size: 0.85rem;
   color: var(--accent);
@@ -148,27 +148,27 @@
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--accent), #e64a19);
+  background: linear-gradient(135deg, var(--accent), var(--accent-dark));
   color: #fff;
-  box-shadow: 0 4px 20px rgba(255, 87, 34, 0.35);
+  box-shadow: 0 4px 20px rgba(var(--accent-rgb), 0.35);
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(255, 87, 34, 0.5);
+  box-shadow: 0 8px 30px rgba(var(--accent-rgb), 0.5);
 }
 
 .btn-outline {
   background: transparent;
   color: var(--text-primary);
-  border: 1.5px solid rgba(255, 255, 255, 0.15);
+  border: 1.5px solid rgba(var(--surface-rgb), 0.15);
 }
 
 .btn-outline:hover {
   border-color: var(--accent);
   color: var(--accent);
   transform: translateY(-2px);
-  box-shadow: 0 4px 20px rgba(255, 87, 34, 0.15);
+  box-shadow: 0 4px 20px rgba(var(--accent-rgb), 0.15);
 }
 
 /* ---- Right Side: Profile Graphic ---- */
@@ -201,7 +201,7 @@
 .neon-ring {
   position: absolute;
   border-radius: 50%;
-  border: 1.5px solid rgba(255, 87, 34, 0.25);
+  border: 1.5px solid rgba(var(--accent-rgb), 0.25);
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -211,16 +211,16 @@
 .ring-1 {
   width: 490px;
   height: 490px;
-  border-color: rgba(255, 87, 34, 0.35);
-  box-shadow: 0 0 15px rgba(255, 87, 34, 0.1);
+  border-color: rgba(var(--accent-rgb), 0.35);
+  box-shadow: 0 0 15px rgba(var(--accent-rgb), 0.1);
   animation-duration: 25s;
 }
 
 .ring-2 {
   width: 530px;
   height: 530px;
-  border-color: rgba(255, 87, 34, 0.2);
-  box-shadow: 0 0 10px rgba(255, 87, 34, 0.08);
+  border-color: rgba(var(--accent-rgb), 0.2);
+  box-shadow: 0 0 10px rgba(var(--accent-rgb), 0.08);
   animation-duration: 30s;
   animation-direction: reverse;
 }
@@ -228,15 +228,15 @@
 .ring-3 {
   width: 575px;
   height: 575px;
-  border-color: rgba(255, 87, 34, 0.12);
-  box-shadow: 0 0 8px rgba(255, 87, 34, 0.05);
+  border-color: rgba(var(--accent-rgb), 0.12);
+  box-shadow: 0 0 8px rgba(var(--accent-rgb), 0.05);
   animation-duration: 35s;
 }
 
 .ring-4 {
   width: 620px;
   height: 620px;
-  border-color: rgba(255, 87, 34, 0.06);
+  border-color: rgba(var(--accent-rgb), 0.06);
   animation-duration: 40s;
   animation-direction: reverse;
 }
@@ -251,8 +251,8 @@
   height: 240px;
   background: radial-gradient(
     ellipse at center,
-    rgba(255, 87, 34, 0.35) 0%,
-    rgba(255, 87, 34, 0.1) 40%,
+    rgba(var(--accent-rgb), 0.35) 0%,
+    rgba(var(--accent-rgb), 0.1) 40%,
     transparent 70%
   );
   border-radius: 50%;
@@ -268,8 +268,8 @@
   border-radius: 50%;
   overflow: hidden;
   z-index: 3;
-  border: 4px solid rgba(255, 87, 34, 0.4);
-  box-shadow: 0 0 120px rgba(255, 87, 34, 0.4);
+  border: 4px solid rgba(var(--accent-rgb), 0.4);
+  box-shadow: 0 0 120px rgba(var(--accent-rgb), 0.4);
 }
 
 .profile-img {
@@ -327,7 +327,7 @@
 .mouse {
   width: 24px;
   height: 38px;
-  border: 2px solid rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(var(--surface-rgb), 0.2);
   border-radius: 12px;
   position: relative;
 }

@@ -1,5 +1,18 @@
 import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+
+interface Certificate {
+  title: string;
+  issuer: string;
+  date: string;
+  icon: string;
+  credentialId: string;
+  description: string;
+  skills: string[];
+  fileUrl: string;
+}
 
 @Component({
   selector: 'app-certificates',
@@ -18,55 +31,21 @@ export class CertificatesComponent implements OnInit, OnDestroy {
   private autoSlideInterval: any;
   private restartTimeout: any;
 
-  certificates = [
-    {
-      title: 'Angular Developer Certification',
-      issuer: 'Google / Angular Team',
-      date: '2024',
-      icon: '🅰️',
-      credentialId: 'ANG-2024-8841',
-      description: 'Validates advanced proficiency building production-grade Angular applications with modern standalone architecture.',
-      skills: ['Standalone Components', 'RxJS', 'Signals', 'SSR']
-    },
-    {
-      title: '.NET Full Stack Developer',
-      issuer: 'Microsoft',
-      date: '2023',
-      icon: '🟣',
-      credentialId: 'MS-DOTNET-2023-5567',
-      description: 'Covers end-to-end application delivery across C#, ASP.NET Core, and cloud-ready deployment pipelines.',
-      skills: ['ASP.NET Core', 'C#', 'EF Core', 'REST APIs']
-    },
-    {
-      title: 'Python for AI & Automation',
-      issuer: 'Coursera',
-      date: '2024',
-      icon: '🐍',
-      credentialId: 'CRS-PY-AI-2024-1129',
-      description: 'Focused on applying Python to intelligent automation, data pipelines, and machine learning workflows.',
-      skills: ['Python', 'Automation', 'Machine Learning', 'Data Pipelines']
-    },
-    {
-      title: 'AWS Cloud Practitioner',
-      issuer: 'Amazon Web Services',
-      date: '2023',
-      icon: '☁️',
-      credentialId: 'AWS-CCP-2023-7734',
-      description: 'Demonstrates foundational knowledge of AWS cloud services, architecture, security, and pricing models.',
-      skills: ['Cloud Architecture', 'AWS Core Services', 'Security', 'Cost Optimization']
-    },
-    {
-      title: 'TypeScript Advanced',
-      issuer: 'Udemy',
-      date: '2024',
-      icon: '🔷',
-      credentialId: 'UDM-TS-ADV-2024-9902',
-      description: 'Deep dive into advanced typing, generics, and design patterns for building scalable TypeScript codebases.',
-      skills: ['Generics', 'Type Design', 'Decorators', 'Tooling']
-    }
-  ];
+  certificates: Certificate[] = [];
+
+  // Modal state
+  selectedCert: Certificate | null = null;
+  isClosingModal = false;
+  safeFileUrl: SafeResourceUrl | null = null;
+  private closeModalTimeout: any;
+
+  constructor(private http: HttpClient, private sanitizer: DomSanitizer) {}
 
   ngOnInit() {
+    this.http.get<Certificate[]>('assets/data/certificates.json').subscribe((data) => {
+      this.certificates = data;
+    });
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -88,11 +67,17 @@ export class CertificatesComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.stopAutoSlide();
     if (this.restartTimeout) clearTimeout(this.restartTimeout);
+    if (this.closeModalTimeout) clearTimeout(this.closeModalTimeout);
+    document.body.style.overflow = '';
   }
 
   @HostListener('window:keydown', ['$event'])
   onKeydown(event: KeyboardEvent) {
-    if (!this.isVisible) return;
+    if (event.key === 'Escape' && this.selectedCert) {
+      this.closeCertModal();
+      return;
+    }
+    if (!this.isVisible || this.selectedCert) return;
     if (event.key === 'ArrowLeft') this.prev();
     if (event.key === 'ArrowRight') this.next();
   }
@@ -182,5 +167,36 @@ export class CertificatesComponent implements OnInit, OnDestroy {
   getOpacity(index: number): number {
     const diff = Math.abs(index - this.currentIndex);
     return diff > 2 ? 0 : 1 - diff * 0.25;
+  }
+
+  isPdfFile(url: string): boolean {
+    return url.toLowerCase().endsWith('.pdf');
+  }
+
+  encodedUrl(url: string): string {
+    // Encode each path segment individually so '#' and spaces in filenames
+    // (e.g. "C# certificate.png") don't get parsed as a URL fragment.
+    // encodeURI() alone won't do this since it deliberately leaves '#' untouched.
+    return url.split('/').map(encodeURIComponent).join('/');
+  }
+
+  openCertModal(cert: Certificate) {
+    this.stopAutoSlide();
+    this.selectedCert = cert;
+    this.isClosingModal = false;
+    this.safeFileUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.encodedUrl(cert.fileUrl));
+    document.body.style.overflow = 'hidden';
+  }
+
+  closeCertModal() {
+    this.isClosingModal = true;
+    if (this.closeModalTimeout) clearTimeout(this.closeModalTimeout);
+    this.closeModalTimeout = setTimeout(() => {
+      this.selectedCert = null;
+      this.safeFileUrl = null;
+      this.isClosingModal = false;
+      document.body.style.overflow = '';
+      if (!this.isPaused) this.startAutoSlide();
+    }, 220);
   }
 }
