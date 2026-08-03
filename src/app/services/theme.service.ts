@@ -1,6 +1,6 @@
 import { Injectable, effect, signal } from '@angular/core';
 
-export type AccentColor = 'orange' | 'blue' | 'gray';
+export type AccentColor = 'orange' | 'blue' | 'gray' | 'green' | 'purple' | 'pink';
 export type ThemeMode = 'dark' | 'light';
 
 const ACCENT_KEY = 'portfolio-accent';
@@ -39,7 +39,8 @@ export class ThemeService {
 
   private readAccent(): AccentColor {
     const saved = localStorage.getItem(ACCENT_KEY);
-    return saved === 'blue' || saved === 'gray' ? saved : 'orange';
+    const valid: AccentColor[] = ['orange', 'blue', 'gray', 'green', 'purple', 'pink'];
+    return valid.includes(saved as AccentColor) ? (saved as AccentColor) : 'orange';
   }
 
   private readMode(): ThemeMode {

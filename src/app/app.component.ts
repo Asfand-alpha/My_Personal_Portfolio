@@ -8,6 +8,7 @@ import { ProjectsComponent } from './components/projects/projects.component';
 import { CertificatesComponent } from './components/certificates/certificates.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { ThemeSwitcherComponent } from './components/theme-switcher/theme-switcher.component';
+import { ChatWidgetComponent } from './components/chat-widget/chat-widget.component';
 
 @Component({
   selector: 'app-root',
@@ -21,7 +22,8 @@ import { ThemeSwitcherComponent } from './components/theme-switcher/theme-switch
     ProjectsComponent,
     CertificatesComponent,
     ContactComponent,
-    ThemeSwitcherComponent
+    ThemeSwitcherComponent,
+    ChatWidgetComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'

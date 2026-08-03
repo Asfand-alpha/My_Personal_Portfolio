@@ -11,6 +11,10 @@
 npm-debug.log
 yarn-error.log
 
+# Chat proxy server (server/) - never commit the API key
+server/node_modules
+server/.env
+
 # IDEs and editors
 .idea/
 .project

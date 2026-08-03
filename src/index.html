@@ -14,7 +14,8 @@
       try {
         var accent = localStorage.getItem('portfolio-accent');
         var mode = localStorage.getItem('portfolio-theme-mode');
-        if (accent === 'blue' || accent === 'gray') {
+        var validAccents = ['blue', 'gray', 'green', 'purple', 'pink'];
+        if (validAccents.indexOf(accent) !== -1) {
           document.documentElement.setAttribute('data-accent', accent);
         }
         document.documentElement.setAttribute('data-theme', mode === 'light' ? 'light' : 'dark');

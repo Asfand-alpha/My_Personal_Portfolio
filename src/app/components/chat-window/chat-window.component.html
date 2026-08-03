@@ -1,0 +1,42 @@
+<div class="chat-window">
+  <div class="chat-header">
+    <span class="chat-title">
+      <span class="bot-dot"></span>
+      Alpha · Asfandyar's Assistant
+    </span>
+    <button class="chat-close" (click)="close()" aria-label="Close chat">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18"/>
+        <line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+  </div>
+
+  <div class="chat-messages" #messagesEl>
+    @for (msg of messages; track $index) {
+      <div class="msg" [class.from-bot]="msg.from === 'bot'" [class.from-visitor]="msg.from === 'visitor'">
+        {{ msg.text }}
+      </div>
+    }
+    @if (isBotTyping) {
+      <div class="msg from-bot typing-indicator">
+        <span></span><span></span><span></span>
+      </div>
+    }
+  </div>
+
+  <div class="chat-contact-fields">
+    <input type="text" placeholder="Your name (optional)" [(ngModel)]="visitorName" name="visitorName" />
+    <input type="email" placeholder="Your email (optional)" [(ngModel)]="visitorEmail" name="visitorEmail" />
+  </div>
+
+  <form class="chat-input-row" (ngSubmit)="send()">
+    <input type="text" placeholder="Type a message..." [(ngModel)]="draft" name="draft" autocomplete="off" />
+    <button type="submit" aria-label="Send" [disabled]="!draft.trim()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="22" y1="2" x2="11" y2="13"/>
+        <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+      </svg>
+    </button>
+  </form>
+</div>

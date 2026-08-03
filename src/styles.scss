@@ -45,6 +45,24 @@
   --accent-dark-rgb: 71, 85, 105;
 }
 
+:root[data-accent='green'] {
+  --accent-rgb: 4, 120, 87;
+  --accent-light-rgb: 16, 185, 129;
+  --accent-dark-rgb: 6, 95, 70;
+}
+
+:root[data-accent='purple'] {
+  --accent-rgb: 124, 58, 237;
+  --accent-light-rgb: 167, 139, 250;
+  --accent-dark-rgb: 91, 33, 182;
+}
+
+:root[data-accent='pink'] {
+  --accent-rgb: 225, 29, 72;
+  --accent-light-rgb: 251, 113, 133;
+  --accent-dark-rgb: 159, 18, 57;
+}
+
 /* ---- Light theme ---- */
 :root[data-theme='light'] {
   --bg-primary: #f6f6f4;

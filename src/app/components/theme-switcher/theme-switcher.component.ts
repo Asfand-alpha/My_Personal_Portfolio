@@ -15,7 +15,10 @@ export class ThemeSwitcherComponent {
   accentOptions: { value: AccentColor; label: string; color: string }[] = [
     { value: 'orange', label: 'Orange', color: '#ff5722' },
     { value: 'blue', label: 'Blue', color: '#3b82f6' },
-    { value: 'gray', label: 'Gray', color: '#64748b' }
+    { value: 'gray', label: 'Gray', color: '#64748b' },
+    { value: 'green', label: 'Green', color: '#047857' },
+    { value: 'purple', label: 'Purple', color: '#7c3aed' },
+    { value: 'pink', label: 'Pink', color: '#e11d48' }
   ];
 
   constructor(public themeService: ThemeService, private elRef: ElementRef) {}

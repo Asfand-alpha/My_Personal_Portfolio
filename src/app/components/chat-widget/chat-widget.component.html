@@ -1,0 +1,5 @@
+<canvas #canvasEl class="flying-bot-canvas" [class.visible]="isVisible"></canvas>
+
+@if (chatOpen) {
+  <app-chat-window (closeWindow)="onChatClose()"></app-chat-window>
+}
